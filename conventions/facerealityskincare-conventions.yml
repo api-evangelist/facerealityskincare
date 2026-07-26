@@ -1,0 +1,49 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  https://facerealityskincare.com/llms.txt + Storefront MCP tool schemas +
+  /.well-known/ucp
+description: >-
+  Cross-cutting runtime semantics for the Shopify-hosted Face Reality Skincare
+  agent-commerce surface, captured from the store's published llms.txt, the live
+  Storefront MCP tool schemas, and the UCP merchant profile. This is a Shopify
+  storefront, not a bespoke REST API, so conventions reflect the Shopify/UCP
+  agent-commerce model.
+auth:
+  style: oauth2
+  detail: >-
+    Shop/read tools on the Storefront MCP require no auth. Customer-account and
+    checkout-completion flows use the Shopify Customer Account API OAuth 2.0
+    Authorization Code + PKCE flow (see authentication/facerealityskincare-authentication.yml).
+    Checkout completion always requires explicit human buyer approval.
+pagination:
+  style: cursor
+  detail: >-
+    search_catalog results are paginated; the response returns a
+    pagination.cursor which is passed back to fetch additional pages. Initial
+    results are limited to improve experience.
+buyer_context:
+  detail: >-
+    Agents pass context.address_country (ISO 3166-1 alpha-2) and
+    context.currency for accurate pricing, localization, and availability.
+rate_limits:
+  signaling: http-429
+  detail: >-
+    The MCP endpoint is rate-limited per IP. Clients must back off on 429
+    responses. (See rate-limits family; no numeric quota is published.)
+read_only_surface:
+  detail: >-
+    Unauthenticated read access is documented for product/collection data via
+    /products/{handle}.json, /collections/{handle}/products.json,
+    /search?q={query}&type=product, and /sitemap.xml.
+error_envelope:
+  style: jsonrpc
+  detail: >-
+    MCP errors follow JSON-RPC 2.0 error objects (e.g. code -32001 "UCP discovery
+    failed" observed from /api/ucp/mcp without an agent profile). No RFC 9457
+    problem+json surface is published.
+crosslinks:
+  authentication: authentication/facerealityskincare-authentication.yml
+  scopes: scopes/facerealityskincare-scopes.yml
+  mcp: mcp/facerealityskincare-mcp.yml
+  llms: llms/facerealityskincare-llms.txt

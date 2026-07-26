@@ -1,0 +1,32 @@
+generated: '2026-07-19'
+method: searched
+source: https://facerealityskincare.com/.well-known/openid-configuration
+docs: https://shopify.dev/docs/api/customer
+description: >-
+  OAuth 2.0 scopes advertised by the Shopify Customer Account API discovery
+  document for Face Reality Skincare (scopes_supported). openid/email are
+  standard OIDC scopes; the customer-account-api and customer-account-mcp-api
+  full scopes gate access to the customer account GraphQL API and its MCP
+  surface respectively.
+schemes:
+- name: shopifyCustomerAccountOAuth
+  type: oauth2
+  authorizationUrl: https://account.facerealityskincare.com/authentication/oauth/authorize
+  tokenUrl: https://account.facerealityskincare.com/authentication/oauth/token
+scopes:
+- scope: openid
+  description: Standard OpenID Connect scope; returns an ID token identifying the customer.
+  schemes:
+  - shopifyCustomerAccountOAuth
+- scope: email
+  description: Access to the customer's email address and email_verified claim.
+  schemes:
+  - shopifyCustomerAccountOAuth
+- scope: customer-account-api:full
+  description: Full access to the Shopify Customer Account API on behalf of the signed-in customer.
+  schemes:
+  - shopifyCustomerAccountOAuth
+- scope: customer-account-mcp-api:full
+  description: Full access to the customer-account MCP surface on behalf of the signed-in customer.
+  schemes:
+  - shopifyCustomerAccountOAuth

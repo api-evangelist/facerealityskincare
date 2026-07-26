@@ -1,0 +1,12 @@
+generated: '2026-07-19'
+method: generated
+source: >-
+  Packaged Agent Skill generated from the live Face Reality Skincare Storefront
+  MCP tool surface (mcp/facerealityskincare-mcp.yml). Every step is grounded in a
+  tool name verified verbatim from https://facerealityskincare.com/api/mcp; rules
+  cite ../conventions/ and ../llms/.
+skills:
+- file: facerealityskincare-shop-catalog.md
+  name: Shop the Face Reality Skincare catalog
+  mcp: mcp/facerealityskincare-mcp.yml
+  operations: [search_catalog, get_product_details, update_cart, get_cart, search_shop_policies_and_faqs]

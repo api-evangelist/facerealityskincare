@@ -1,0 +1,31 @@
+generated: '2026-07-19'
+method: searched
+source: live probes of https://facerealityskincare.com/.well-known/*
+description: >-
+  Results of probing the /.well-known/ discovery surface for the base host in
+  apis.yml. Status is the HTTP code observed at fetch time. Only documents that
+  returned a real, correctly-typed payload were saved verbatim. This is a
+  Shopify-hosted store: openid-configuration and oauth-authorization-server both
+  return Shopify's Customer Account API discovery document, and /.well-known/ucp
+  returns the store's Universal Commerce Protocol merchant profile.
+hosts:
+- host: https://facerealityskincare.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 200
+    type: application/json
+    file: facerealityskincare-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    type: application/json
+    file: facerealityskincare-oauth-authorization-server.json
+  - path: /.well-known/ucp
+    status: 200
+    type: application/json
+    file: facerealityskincare-ucp.json
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404

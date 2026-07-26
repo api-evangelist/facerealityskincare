@@ -1,0 +1,60 @@
+generated: '2026-07-19'
+method: searched
+status: published
+source: https://facerealityskincare.com/api/mcp (live JSON-RPC tools/list + initialize)
+description: >-
+  Face Reality Skincare runs on Shopify, which exposes a hosted Storefront MCP
+  server at https://facerealityskincare.com/api/mcp. A live JSON-RPC
+  initialize handshake reports serverInfo name "storefront-renderer" v0.1.0 with
+  tools/prompts/resources capabilities. The store also advertises a Universal
+  Commerce Protocol (UCP) MCP endpoint at /api/ucp/mcp, but that endpoint
+  requires a UCP agent profile URI for discovery (returns error
+  invalid_profile_url without one). The unauthenticated storefront MCP tool list
+  below was captured verbatim from the live server on 2026-07-19.
+server:
+  name: storefront-renderer
+  version: 0.1.0
+  transport: http
+  url: https://facerealityskincare.com/api/mcp
+  protocolVersion: '2025-06-18'
+  auth: none
+  capabilities:
+    tools: true
+    prompts: true
+    resources: true
+    logging: true
+  notes: >-
+    Read/shop tools are reachable without authentication. Checkout completion
+    requires human buyer approval (see llms/facerealityskincare-llms.txt).
+ucp:
+  endpoint: https://facerealityskincare.com/api/ucp/mcp
+  discovery: https://facerealityskincare.com/.well-known/ucp
+  supported_versions:
+  - '2026-04-08'
+  - '2026-01-23'
+  spec: https://ucp.dev
+  requires_agent_profile: true
+tools:
+- name: search_catalog
+  description: >-
+    Search for products from the online store using natural language queries,
+    specific filter criteria, or both. Results are paginated; use the returned
+    pagination cursor to fetch more. Conforms to the UCP catalog search
+    capability (dev.ucp.shopping.catalog.search).
+- name: get_cart
+  description: >-
+    Get the cart including items, shipping options, discount info, and checkout
+    URL for a given cart id.
+- name: update_cart
+  description: >-
+    Add/remove/update line items, buyer information, shipping details, discount
+    codes, gift cards and notes in one consolidated call. Shipping options
+    become available after adding items and a delivery address.
+- name: search_shop_policies_and_faqs
+  description: >-
+    Get facts about the store's policies, products, or services (return policy,
+    shipping policy, phone number, hours of operation, etc.).
+- name: get_product_details
+  description: >-
+    Look up a product by ID; pass an options parameter to select a specific
+    variant. Without options the first available variant is returned.
