@@ -83,6 +83,9 @@ apis:
     url: authentication/facerealityskincare-authentication.yml
   - type: OAuthScopes
     url: scopes/facerealityskincare-scopes.yml
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: storefront-mcp
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
